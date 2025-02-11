@@ -1,18 +1,29 @@
-#lecture :
 from pydantic import BaseModel, Field
 from typing import Optional
 
+#lecture :
 class Livraison(BaseModel):
-    idLivraison:Optional[str]
-    dateLivraison: str = Field(..., max_length=50)
-    prixBoisson: float = Field(..., ge=25)
+    idLivraison: str
+    idProduit: str
+    idAgent: str
+    idClient: str
+    dateLivraison: str
+    qteLivraison: float
 
 #creation :
-class CreateBoissonSchema(BaseModel):
-    designationTypeBoisson: str = Field(..., max_length=50)
-    prixBoisson: float = Field(..., ge=25)
+class LivraisonCreateModel(BaseModel):
+    idLivraison: str
+    idProduit: str
+    idAgent: str
+    idClient: str
+    dateLivraison: str
+    qteLivraison: float
 
 #mise à jour :
-class UpdateBoissonSchema(BaseModel):
-    designationTypeBoisson: str = Field(None, max_length=50)
-    prixBoisson: float = Field(None, ge=25)
+class LivraisonUpdateModel(BaseModel):
+    idLivraison: Optional[str]
+    idProduit: Optional[str]
+    idAgent: Optional[str]
+    idClient: Optional[str]
+    dateLivraison: Optional[str]
+    qteLivraison: Optional[float]
