@@ -15,19 +15,16 @@ async def get_clients():
     clients = [dict(doc.to_dict(), id=doc.id) for doc in clients_ref]
     if not clients:
         raise HTTPException(status_code=404, detail="Aucun client trouvé")
-    
     return clients
 
 @app_client.get("/get/{client_id}")
 async def get_client(client_id: str):
-    client_ref = db.collection("clients").where("uid", "==", client_id).limit(1).stream()
-    client = list(client_ref)
-    
-    if not client:
-        raise HTTPException(status_code=404, detail="Aucun client trouvé")
-    
+    doc_ref = db.collection("clients").document(client_id).get()
 
-    return client[0].to_dict()
+    if not doc_ref.exists:
+        raise HTTPException(status_code=404, detail="Aucun client trouvé")
+
+    return {"document_id": doc_ref.id, **doc_ref.to_dict()}
 
 
 @app_client.post("/create")

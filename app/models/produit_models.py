@@ -3,18 +3,18 @@ from typing import Optional
 
 #lecture :
 class Produit(BaseModel):
-    idProduit: str
-    idCategorie: str
+    id: str
+    codeCategorie: str
     designationProduit: str
     prixProduit: float
     qteStock: float
-    imageProduit: str
+    imageProduit: Optional[str]
     modeleProduit: str
     formatProduit: str
 
 #creation :
 class ProduitCreateModel(BaseModel):
-    idCategorie: str
+    codeCategorie: str
     designationProduit: str
     prixProduit: float
     qteStock: float

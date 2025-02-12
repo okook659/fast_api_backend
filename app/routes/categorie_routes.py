@@ -13,7 +13,7 @@ async def create_categorie(categorie: CategorieCreateModel):
         raise HTTPException(status_code=400, detail="Code catégorie déjà utilisé")
 
     new_categorie_ref = db.collection("categories").add(categorie.dict())
-    return {"message": "Catégorie créée avec succès", "designation": new_categorie_ref[2].id}
+    return {"message": "Catégorie créée avec succès", "designation": new_categorie_ref[1].id}
 
 
 @app_categorie.get("/get_all", response_model=list)

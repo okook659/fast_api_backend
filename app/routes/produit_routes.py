@@ -13,14 +13,14 @@ async def create_product(produit_data: ProduitCreateModel):
         raise HTTPException(status_code=400, detail="Ce produit existe déjà!")
     
     new_produit_ref = db.collection('produits').add(produit_data.dict())
-    return {"message": "Produit créé avec succès", "designation": new_produit_ref[2].id}
+    return {"message": "Produit créé avec succès"}
 
 @app_produit.get('/get_all')
 async def get_produits():
     produits_ref = db.collection("produits").stream()
     produits = [dict(doc.to_dict(), id=doc.id) for doc in produits_ref]
 
-    if not categories:
+    if not produits:
         raise HTTPException(status_code=404, detail="Aucun produit trouvé")
     
     return produits

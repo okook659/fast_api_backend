@@ -3,7 +3,7 @@ from typing import Optional
 
 #lecture :
 class Categorie(BaseModel):
-    idCategorie: str
+    id: str
     codeCategorie: str
     designationCategorie: str
 #creation :
