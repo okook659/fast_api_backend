@@ -13,7 +13,7 @@ async def create_categorie(categorie: CategorieCreateModel):
         raise HTTPException(status_code=400, detail="Code catégorie déjà utilisé")
 
     new_categorie_ref = db.collection("categories").add(categorie.dict())
-    return {"message": "Catégorie créée avec succès", "designation": new_categorie_ref[1].id}
+    return {"message": "Catégorie créée avec succès"}
 
 
 @app_categorie.get("/get_all", response_model=list)
@@ -47,9 +47,11 @@ async def update_categorie(categorie_id: str, categorie: CategorieUpdateModel):
         raise HTTPException(status_code=404, detail="Catégorie non trouvée")
 
     updated_data = categorie.dict(exclude_unset=True)
-    categorie_ref.update(updated_data)
-
-    return {"message": f"Catégorie {categorie_id} mise à jour avec succès"}
+    try:
+        categorie_ref.update(updated_data)
+        return {"message": f"Catégorie {categorie_id} mise à jour avec succès"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la mise à jour : {str(e)}")
 
 # 🔹 5. Supprimer une catégorie
 @app_categorie.delete("/delete/{categorie_id}", response_model=dict)

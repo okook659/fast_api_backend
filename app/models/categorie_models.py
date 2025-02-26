@@ -14,4 +14,4 @@ class CategorieCreateModel(BaseModel):
 #mise à jour :
 class CategorieUpdateModel(BaseModel):
     codeCategorie: Optional[str] = Field(example="VinSp")
-    designationCategorie: Optional[str] = Field(example="Viens & Spiritueux")
+    designationCategorie: Optional[str] = Field(example="Vins & Spiritueux")

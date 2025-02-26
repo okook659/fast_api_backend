@@ -19,9 +19,9 @@ async def create_admin(admin_data: AdminCreateModel):
             email=admin_data.email,
             password=admin_data.password
         )
-        uid = user_record.uid  # Récupérer l'UID généré par Firebase
+        uid = user_record.uid  
 
-        # 🔹 2. Stocker les infos du admin dans Firestore
+        
         admin_dict = admin_data.dict()
         del admin_dict["password"]  # Sécurité : ne jamais stocker le mot de passe
         admin_dict["uid"] = uid  # Associer l'UID Firebase
