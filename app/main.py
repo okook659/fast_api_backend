@@ -7,6 +7,7 @@ from app.routes.user_routes import app_user
 from app.routes.categorie_routes import app_categorie
 from app.routes.produit_routes import app_produit
 from app.routes.commande_routes import app_commande
+from app.routes.notifications import app_notifications
 from app.firebase import auth
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
@@ -19,6 +20,7 @@ app.include_router(app_user)
 app.include_router(app_client)
 app.include_router(app_agent)
 app.include_router(app_admin)
+app.include_router(app_notifications)
 
 origins = [
     "http://localhost:5173",  # React en développement
